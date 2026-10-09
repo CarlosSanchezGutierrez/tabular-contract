@@ -24,6 +24,14 @@ PASS  orders.csv
   paid: boolean, 2 distinct, 0 empty
 ~~~
 
+Use --format json for a machine-readable report that can be consumed by a pipeline:
+
+~~~bash
+tabular-contract examples/orders.csv --contract examples/orders.contract.json --format json
+~~~
+
+The JSON report includes the overall validity, row and column counts, per-column profile, and any validation errors. The process keeps the same exit codes in either output format.
+
 ## Contract format
 
 Contracts are JSON files. Column types currently supported are string, integer, number, boolean, and ISO date. Columns are nullable unless nullable is set to false. A unique rule can name one column or a composite key.
