@@ -1,0 +1,4 @@
+order_id,customer_email,total,paid
+1001,ana@example.com,125.50,true
+1002,luis@example.com,89.00,false
+1003,sofia@example.com,310.25,true

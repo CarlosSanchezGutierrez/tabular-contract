@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tabular-contract"
+version = "0.1.0"
+description = "A dependency-free CSV data contract validator and profiler."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Carlos Sánchez Gutiérrez" }]
+keywords = ["data-engineering", "csv", "data-quality", "data-contracts", "etl"]
+classifiers = ["Development Status :: 3 - Alpha", "Environment :: Console", "Intended Audience :: Developers", "License :: OSI Approved :: MIT License", "Programming Language :: Python :: 3", "Topic :: Database", "Topic :: Software Development :: Quality Assurance"]
+
+[project.scripts]
+tabular-contract = "tabular_contract.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

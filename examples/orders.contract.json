@@ -1,0 +1,10 @@
+{
+  "min_rows": 1,
+  "columns": {
+    "order_id": { "type": "integer", "nullable": false },
+    "customer_email": { "type": "string", "nullable": false },
+    "total": { "type": "number", "nullable": false },
+    "paid": { "type": "boolean", "nullable": false }
+  },
+  "unique": ["order_id"]
+}
