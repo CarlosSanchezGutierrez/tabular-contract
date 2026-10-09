@@ -156,6 +156,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(prog="tabular-contract", description="Profile a CSV and validate it against a small JSON data contract.")
     parser.add_argument("csv_file", type=Path, help="CSV file to inspect")
     parser.add_argument("--contract", type=Path, help="Optional JSON contract file")
+    parser.add_argument("--format", choices=("text", "json"), default="text", help="Report format (default: text)")
     args = parser.parse_args()
     try:
         contract = load_contract(args.contract)
@@ -163,12 +164,15 @@ def main() -> int:
     except (OSError, json.JSONDecodeError, ValueError) as error:
         print(f"tabular-contract: {error}", file=sys.stderr)
         return 2
-    print(f"{'PASS' if report['valid'] else 'FAIL'}  {report['file']}")
-    print(f"{report['rows']} row(s) · {len(report['columns'])} column(s)")
-    for column in report["columns"]:
-        print(f"  {column['name']}: {column['inferred_type']}, {column['distinct_values']} distinct, {column['empty_values']} empty")
-    for error in report["errors"]:
-        print(f"ERROR  {error}")
+    if args.format == "json":
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+    else:
+        print(f"{'PASS' if report['valid'] else 'FAIL'}  {report['file']}")
+        print(f"{report['rows']} row(s) · {len(report['columns'])} column(s)")
+        for column in report["columns"]:
+            print(f"  {column['name']}: {column['inferred_type']}, {column['distinct_values']} distinct, {column['empty_values']} empty")
+        for error in report["errors"]:
+            print(f"ERROR  {error}")
     return 0 if report["valid"] else 1
 
 
